@@ -16,6 +16,8 @@ namespace BulletinBoard
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure();
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
