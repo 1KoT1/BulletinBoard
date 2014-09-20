@@ -25,6 +25,7 @@ namespace BulletinBoard.Models
         /// <param name="menuItem">Ссылка на объект в хранилище, который следует удалить</param>
         /// <exception cref="RepositoryHasNotThisItemException">Указанный объект не содержится в хранилище</exception>
         void RemoveAdvertisementAndSaveAllChanges(Advertisement advertisement);
+        void SaveAllChanges();
     }
         
     class CreatedObjectIsNotEmptyException : Exception

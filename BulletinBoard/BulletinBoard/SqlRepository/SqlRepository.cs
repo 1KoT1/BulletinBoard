@@ -34,6 +34,10 @@ namespace BulletinBoard.SqlRepository
             }
 
             db.Advertisements.Remove(advertisement);
+            SaveAllChanges();
+        }
+        public void SaveAllChanges()
+        {
             db.SaveChanges();
         }
     }
