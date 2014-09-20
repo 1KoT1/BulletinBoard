@@ -10,6 +10,8 @@ namespace BulletinBoard.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using BulletinBoard.Models;
+    using BulletinBoard.SqlRepository;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +63,7 @@ namespace BulletinBoard.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IRepository>().To<SqlRepository>().InThreadScope();
         }        
     }
 }

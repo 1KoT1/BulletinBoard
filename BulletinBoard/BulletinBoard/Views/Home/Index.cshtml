@@ -1,6 +1,16 @@
-﻿@{
+﻿@model IEnumerable<BulletinBoard.Models.Advertisement>
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
+
+<div>
+    @foreach(var advertisement in Model)
+    {
+        <div class="advertisement">
+            @advertisement.Name;
+        </div>
+    }
+</div>

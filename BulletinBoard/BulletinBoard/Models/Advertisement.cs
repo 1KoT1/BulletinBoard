@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,8 @@ namespace BulletinBoard.Models
 {
     public class Advertisement
     {
-        public uint IdAdvertisement { get; set; }
+        [Key]
+        public int IdAdvertisement { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public uint Price { get; set; }
