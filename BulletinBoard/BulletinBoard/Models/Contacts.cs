@@ -7,6 +7,7 @@ namespace BulletinBoard.Models
 {
     public class Contacts
     {
+        public uint IdConacts { get; set; }
         public string Address { get; set; }
     }
 }

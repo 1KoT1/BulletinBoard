@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Contacts.cs" />
+    <Compile Include="Models\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

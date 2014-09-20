@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BulletinBoard.Models
+{
+    interface IRepository
+    {
+        ICollection<Advertisement> Advertisements { get; }
+
+        /// <summary> Создайте объект Advertisement или его наследника и передайте в данный метод,
+        /// чтобы сохранить его в хранилище.
+        /// Свойство Id создаваемого объекта должно быть равно  0.
+        /// Метод вернёт ссылку на переданный объект, заполнив его свойство Id.
+        /// </summary>
+        /// <param name="menuitem">Создаваемый объект.</param>
+        /// <returns>Ссылка на переданный объект с заполненым свойством Id</returns>
+        Advertisement CreateAdvertisement(Advertisement advertisement);
+
+        /// <summary> Удаляет указанный объект из хранилища.
+        /// </summary>
+        /// <param name="menuItem">Ссылка на объект в хранилище, который следует удалить</param>
+        void RemoveAdvertisement(Advertisement advertisement);
+
+        /// <summary> Сохраняет указанный объект.
+        /// </summary>
+        /// <param name="menuItem">Ссылка на объект в хранилище, который следует сохранить</param>
+        void UpdateAdvertisement(Advertisement advertisement);
+    }
+}
