@@ -17,16 +17,33 @@ namespace BulletinBoard.Models
         /// </summary>
         /// <param name="menuitem">Создаваемый объект.</param>
         /// <returns>Ссылка на переданный объект с заполненым свойством Id</returns>
+        /// <exception cref="CreatedObjectIsNotEmptyException">Свойство Id переданного объекта не равно 0.</exception>
         Advertisement CreateAdvertisement(Advertisement advertisement);
 
         /// <summary> Удаляет указанный объект из хранилища.
         /// </summary>
         /// <param name="menuItem">Ссылка на объект в хранилище, который следует удалить</param>
+        /// <exception cref="RepositoryHasNotThisItemException">Указанный объект не содержится в хранилище</exception>
         void RemoveAdvertisement(Advertisement advertisement);
 
         /// <summary> Сохраняет указанный объект.
         /// </summary>
         /// <param name="menuItem">Ссылка на объект в хранилище, который следует сохранить</param>
+        /// <exception cref="RepositoryHasNotThisItemException">Указанный объект не содержится в хранилище</exception>
         void UpdateAdvertisement(Advertisement advertisement);
+    }
+        
+    class CreatedObjectIsNotEmptyException : Exception
+    {
+        public CreatedObjectIsNotEmptyException() :
+            base("Свойство Id создаваемого элемента должно быть равно  0.")
+        { }
+    }
+
+    class RepositoryHasNotThisItemException : Exception
+    {
+        public RepositoryHasNotThisItemException() :
+            base("Данный элемент не содержится в хранилище. Вероятно объект данных создавался минуя предназначенный для этого метод хранилища")
+        { }
     }
 }
