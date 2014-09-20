@@ -10,6 +10,6 @@ namespace BulletinBoard.Models
     {
         [Key]
         public int IdContacts { get; set; }
-        public string Address { get; set; }
+        public string Text { get; set; }
     }
 }

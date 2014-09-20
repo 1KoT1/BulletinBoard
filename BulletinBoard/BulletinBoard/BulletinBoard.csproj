@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201409201254537_InitialCreate.Designer.cs">
       <DependentUpon>201409201254537_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409201504363_ChangeContactsStructure.cs" />
+    <Compile Include="Migrations\201409201504363_ChangeContactsStructure.Designer.cs">
+      <DependentUpon>201409201504363_ChangeContactsStructure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Contacts.cs" />
@@ -257,6 +261,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409201254537_InitialCreate.resx">
       <DependentUpon>201409201254537_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409201504363_ChangeContactsStructure.resx">
+      <DependentUpon>201409201504363_ChangeContactsStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
