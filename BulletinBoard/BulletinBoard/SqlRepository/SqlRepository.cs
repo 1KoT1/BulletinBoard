@@ -36,15 +36,5 @@ namespace BulletinBoard.SqlRepository
             db.Advertisements.Remove(advertisement);
             db.SaveChanges();
         }
-
-        public void UpdateAdvertisement(Advertisement advertisement)
-        {
-            if (Advertisements.All(adv => adv.IdAdvertisement != advertisement.IdAdvertisement))
-            {
-                throw new RepositoryHasNotThisItemException();
-            }
-
-            db.SaveChanges();
-        }
     }
 }
