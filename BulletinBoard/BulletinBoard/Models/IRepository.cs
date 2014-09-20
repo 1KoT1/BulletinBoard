@@ -8,7 +8,7 @@ namespace BulletinBoard.Models
 {
     interface IRepository
     {
-        ICollection<Advertisement> Advertisements { get; }
+        IEnumerable<Advertisement> Advertisements { get; }
 
         /// <summary> Создайте объект Advertisement или его наследника и передайте в данный метод,
         /// чтобы сохранить его в хранилище.
