@@ -24,7 +24,7 @@ namespace BulletinBoard.Models
         /// </summary>
         /// <param name="menuItem">Ссылка на объект в хранилище, который следует удалить</param>
         /// <exception cref="RepositoryHasNotThisItemException">Указанный объект не содержится в хранилище</exception>
-        void RemoveAdvertisement(Advertisement advertisement);
+        void RemoveAdvertisementAndSaveAllChanges(Advertisement advertisement);
 
         /// <summary> Сохраняет указанный объект.
         /// </summary>

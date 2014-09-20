@@ -26,7 +26,7 @@ namespace BulletinBoard.SqlRepository
             return advertisement;
         }
 
-        public void RemoveAdvertisement(Advertisement advertisement)
+        public void RemoveAdvertisementAndSaveAllChanges(Advertisement advertisement)
         {
             if (Advertisements.All(adv => adv.IdAdvertisement != advertisement.IdAdvertisement))
             {
