@@ -150,6 +150,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409201254537_InitialCreate.cs" />
+    <Compile Include="Migrations\201409201254537_InitialCreate.Designer.cs">
+      <DependentUpon>201409201254537_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Contacts.cs" />
     <Compile Include="Models\IRepository.cs" />
@@ -248,6 +253,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201409201254537_InitialCreate.resx">
+      <DependentUpon>201409201254537_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
