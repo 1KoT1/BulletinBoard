@@ -1,11 +1,11 @@
 ﻿@model BulletinBoard.ViewModels.CreateAdvertisementView
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Подать объявление";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Save", "Advertisements", FormMethod.Post))
 {
