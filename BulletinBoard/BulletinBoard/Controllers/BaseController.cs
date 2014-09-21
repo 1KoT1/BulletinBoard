@@ -22,5 +22,19 @@ namespace BulletinBoard.Controllers
         {
             repository = DependencyResolver.Current.GetService<IRepository>();
         }
+
+        protected delegate bool Rule();
+        protected bool CheckRuleAndSetErrMessage(Rule rule, string key, string errMessage)
+        {
+            if (rule())
+            {
+                return true;
+            }
+            else
+            {
+                ModelState.AddModelError(key, errMessage);
+                return false;
+            }
+        }
     }
 }

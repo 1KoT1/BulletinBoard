@@ -35,11 +35,22 @@ namespace BulletinBoard.Controllers
         private bool ValidateNewAdvertisement(CreateAdvertisementView newAdvertisement)
         {
             bool newAdvertisementValid = true;
-            if (newAdvertisement.Price < 0)
+
+            newAdvertisementValid &= CheckRuleAndSetErrMessage(() => !String.IsNullOrWhiteSpace(newAdvertisement.Name), "Name", "Ведите заголовок объявления.");
+
+            newAdvertisementValid &= CheckRuleAndSetErrMessage(() => !String.IsNullOrWhiteSpace(newAdvertisement.Description), "Description", "Ведите описание объявления.");
+
+            long price = 0;
+            bool priceIsNumber = CheckRuleAndSetErrMessage(() => long.TryParse(newAdvertisement.Price, out price), "Price", "Цена задаётся неотрицательным числом.");
+            newAdvertisementValid &= priceIsNumber;
+            if (priceIsNumber)
             {
-                ModelState.AddModelError("Price", "Цена должна быть не отрицательна.");
-                newAdvertisementValid = false;
+                newAdvertisementValid &= CheckRuleAndSetErrMessage(() => price >= 0, "Price", "Цена должна быть неотрицательна.");
+                var maxPrice = UInt32.MaxValue;
+                newAdvertisementValid &= CheckRuleAndSetErrMessage(() => price < maxPrice, "Price", String.Format("Система не может обработать цены выше {0}", maxPrice));
             }
+
+            newAdvertisementValid &= CheckRuleAndSetErrMessage(() => !String.IsNullOrWhiteSpace(newAdvertisement.Contacts), "Contacts", "Укажите способ забрать товар или связаться с вами.");
 
             return newAdvertisementValid;
         }
