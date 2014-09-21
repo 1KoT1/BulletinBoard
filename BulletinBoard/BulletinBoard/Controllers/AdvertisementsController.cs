@@ -21,8 +21,27 @@ namespace BulletinBoard.Controllers
         public ActionResult Save(CreateAdvertisementView newAdvertisement)
         {
             log.Debug("Run Save(Advertisement newAdvertisement)");
-            repository.CreateAdvertisement(new Advertisement(newAdvertisement.Name, newAdvertisement.Description, Convert.ToUInt32(newAdvertisement.Price), DateTime.Now, new Contacts(newAdvertisement.Contacts)));
-            return View();
+            if (ValidateNewAdvertisement(newAdvertisement))
+            {
+                repository.CreateAdvertisement(new Advertisement(newAdvertisement.Name, newAdvertisement.Description, Convert.ToUInt32(newAdvertisement.Price), DateTime.Now, new Contacts(newAdvertisement.Contacts)));
+                return View();
+            }
+            else
+            {
+                return View("Create", newAdvertisement);
+            }
+        }
+
+        private bool ValidateNewAdvertisement(CreateAdvertisementView newAdvertisement)
+        {
+            bool newAdvertisementValid = true;
+            if (newAdvertisement.Price < 0)
+            {
+                ModelState.AddModelError("Price", "Цена должна быть не отрицательна.");
+                newAdvertisementValid = false;
+            }
+
+            return newAdvertisementValid;
         }
         public ActionResult Create()
         {
