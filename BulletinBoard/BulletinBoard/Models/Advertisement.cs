@@ -14,6 +14,18 @@ namespace BulletinBoard.Models
         public string Description { get; set; }
         public uint Price { get; set; }
         public DateTime PublishDate { get; set; }
-        public Contacts Contacts { get; set; }
+
+        [Required]
+        public virtual Contacts Contacts { get; set; }
+
+        public Advertisement()
+        { }
+        public Advertisement(string name, string description, uint price, DateTime publishDate, Contacts contacts)
+        {
+            Name = name;
+            Description = description;
+            PublishDate = publishDate;
+            Contacts = contacts;
+        }
     }
 }

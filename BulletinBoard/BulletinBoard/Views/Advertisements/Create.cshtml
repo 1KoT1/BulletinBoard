@@ -1,0 +1,56 @@
+﻿@model BulletinBoard.ViewModels.CreateAdvertisementView
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("Save", "Advertisements", FormMethod.Post))
+{
+    <fieldset>
+        <div class="editFormItem">
+            <div class="editFormItemTitle">
+                Заголовок объявления:
+            </div>
+            <div class="editFormItemInput">
+                @Html.ValidationMessage("Name")
+                @Html.TextBox("Name", Model.Name)
+            </div>
+        </div>
+        <div class="editFormItem">
+            <div class="editFormItemTitle">
+                Текст объявления:
+            </div>
+            <div class="editFormItemInput">
+                @Html.ValidationMessage("Description")
+                @Html.TextArea("Description", Model.Description)
+            </div>
+        </div>
+        <div class="editFormItem">
+            <div class="editFormItemTitle">
+                Цена товара:
+            </div>
+            <div class="editFormItemInput">
+                @Html.ValidationMessage("Price")
+                @Html.TextBox("Price", Model.Price)
+            </div>
+        </div>
+        <div class="editFormItem">
+            <div class="editFormItemTitle">
+                Контатная информация:
+            </div>
+            <div class="editFormItemInput">
+                @Html.ValidationMessage("Contacts")
+                @Html.TextBox("Contacts", Model.Contacts)
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Добавить
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+    </fieldset>    
+}

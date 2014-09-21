@@ -11,5 +11,10 @@ namespace BulletinBoard.Models
         [Key]
         public int IdContacts { get; set; }
         public string Text { get; set; }
+
+        public Contacts(string text)
+        {
+            Text = text;
+        }
     }
 }

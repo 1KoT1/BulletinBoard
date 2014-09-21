@@ -146,6 +146,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdvertisementsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -158,6 +160,10 @@
     <Compile Include="Migrations\201409201504363_ChangeContactsStructure.Designer.cs">
       <DependentUpon>201409201504363_ChangeContactsStructure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409210915440_ContactsNotNull.cs" />
+    <Compile Include="Migrations\201409210915440_ContactsNotNull.Designer.cs">
+      <DependentUpon>201409210915440_ContactsNotNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Contacts.cs" />
@@ -165,6 +171,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlRepository\BuletinBoardDbContext.cs" />
     <Compile Include="SqlRepository\SqlRepository.cs" />
+    <Compile Include="ViewModels\CreateAdvertisementView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -251,6 +258,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Advertisements\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -264,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409201504363_ChangeContactsStructure.resx">
       <DependentUpon>201409201504363_ChangeContactsStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409210915440_ContactsNotNull.resx">
+      <DependentUpon>201409210915440_ContactsNotNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

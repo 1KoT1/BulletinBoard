@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletinBoard.Models
 {
-    interface IRepository
+    public interface IRepository
     {
         IEnumerable<Advertisement> Advertisements { get; }
 
