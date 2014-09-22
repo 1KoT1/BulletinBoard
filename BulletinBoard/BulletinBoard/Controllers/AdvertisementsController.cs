@@ -14,11 +14,13 @@ namespace BulletinBoard.Controllers
         //
         // GET: /Advertisements/
 
-        public ActionResult List()
+        public ActionResult List(Sort sort = Sort.PublishDate)
         {
             log.Debug("Run List()");
-            return View(repository.Advertisements);
+
+            return View(repository.Advertisements.OrderBy(sort));
         }
+
         public ActionResult Save(CreateAdvertisementView newAdvertisement)
         {
             log.Debug("Run Save(Advertisement newAdvertisement)");
@@ -62,5 +64,28 @@ namespace BulletinBoard.Controllers
         }
 
         ILog log = LogManager.GetLogger(typeof(AdvertisementsController));
+    }
+    public enum Sort
+    {
+        Name,
+        Price,
+        PublishDate
+    }
+
+    static class AdvertisementsExtentions
+    {
+        public static IEnumerable<Advertisement> OrderBy(this IEnumerable<Advertisement> advertisements, Sort sort)
+        {
+            switch (sort)
+            {
+                case Sort.Name:
+                    return advertisements.OrderBy(adv => adv.Name);
+                case Sort.Price:
+                    return advertisements.OrderBy(adv => adv.Price);
+                case Sort.PublishDate:
+                default:
+                    return advertisements.OrderBy(adv => adv.PublishDate);
+            }
+        }
     }
 }

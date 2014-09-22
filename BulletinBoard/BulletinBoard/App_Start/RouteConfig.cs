@@ -14,6 +14,12 @@ namespace BulletinBoard
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "AdvertisementsList",
+                url: "Advertisements/List/sort={sort}",
+                defaults: new { controller = "Advertisements", action = "List", sort = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Advertisements", action = "List", id = UrlParameter.Optional }
