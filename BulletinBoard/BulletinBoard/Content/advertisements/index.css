@@ -1,0 +1,15 @@
+.advertisementTitle{
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid grey;
+    padding: 4px;
+    margin-top: 5px;
+}
+
+.advertisementDescription{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 4px;
+}
