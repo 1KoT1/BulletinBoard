@@ -12,6 +12,8 @@
 
 <h2>Доска объявлений</h2>
 
+@Html.ActionLink("Подать объявление", "Create", "Advertisements")
+
 <div id="advertisementsList">
     @foreach (var advertisement in Model)
     {
