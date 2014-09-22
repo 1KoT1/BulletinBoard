@@ -20,8 +20,9 @@ namespace BulletinBoard.Models
 
         public Advertisement()
         { }
-        public Advertisement(string name, string description, uint price, DateTime publishDate, Contacts contacts)
+        public Advertisement(string name, string description, uint price, DateTime publishDate, Contacts contacts, int id = 0)
         {
+            IdAdvertisement = id;
             Name = name;
             Description = description;
             PublishDate = publishDate;

@@ -12,8 +12,9 @@ namespace BulletinBoard.Models
         public int IdContacts { get; set; }
         public string Text { get; set; }
 
-        public Contacts(string text)
+        public Contacts(string text, int id = 0)
         {
+            IdContacts = id;
             Text = text;
         }
     }
