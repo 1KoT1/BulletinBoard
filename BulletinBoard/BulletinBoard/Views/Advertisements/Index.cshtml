@@ -3,14 +3,25 @@
     ViewBag.Title = "Доска объявлений";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section scripts {
+    @Scripts.Render("/Scripts/advertisement/index.js")
+}
 
 <h2>Доска объявлений</h2>
 
-<div>
-    @foreach(var advertisement in Model)
+<div id="advertisementsList">
+    @foreach (var advertisement in Model)
     {
-        <div class="advertisement">
-            @advertisement.Name;
+        <div class="advertisementTitle">
+            <div class="advertisementName">
+                @advertisement.Name
+            </div>
+            <div class="advertisementPrice">
+                @advertisement.Price
+            </div>
+        </div>
+        <div class="advertisementDescription">
+            @advertisement.Description
         </div>
     }
 </div>
