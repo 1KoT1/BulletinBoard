@@ -12,9 +12,6 @@ namespace BulletinBoard.SqlRepository
 {
     public class SqlRepository : IRepository
     {
-        BuletinBoardDbContext db = new BuletinBoardDbContext();
-
-        private IDbConnection connection = new SqlConnection();
         private string conString = "";
 
         public SqlRepository()
@@ -139,19 +136,103 @@ namespace BulletinBoard.SqlRepository
             return advertisement;
         }
 
-        public void RemoveAdvertisementAndSaveAllChanges(Advertisement advertisement)
+        public void RemoveAdvertisemen(Advertisement advertisement)
         {
-            if (Advertisements.All(adv => adv.IdAdvertisement != advertisement.IdAdvertisement))
+            using (var connection = new SqlConnection(conString))
             {
-                throw new RepositoryHasNotThisItemException();
-            }
+                connection.Open();
 
-            db.Advertisements.Remove(advertisement);
-            SaveAllChanges();
+                var transaction = connection.BeginTransaction();
+                try
+                {
+                    var command = new SqlCommand(@"DELETE FROM Advertisements
+                                                       WHERE Advertisements.IdAdvertisement = @IdAdvertisement",
+                                                  connection,
+                                                  transaction);
+
+                    command.Parameters.AddWithValue("@IdAdvertisement", advertisement.IdAdvertisement);
+
+                    int numberOfDeletedRows = command.ExecuteNonQuery();
+
+                    if (numberOfDeletedRows == 1)
+                    {
+                        transaction.Commit();
+                    }
+                    else if (numberOfDeletedRows == 0)
+                    {
+                        transaction.Rollback();
+                        throw new RepositoryHasNotThisItemException();
+                    }
+                    else
+                    {
+                        // Такого не может быть.
+                        transaction.Rollback();
+                        log.Fatal("Было удалено несколько записей с одинаковыми ID.");
+                    }
+                }
+                catch (RepositoryHasNotThisItemException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message);
+                    transaction.Rollback();
+                }
+            }
         }
-        public void SaveAllChanges()
+
+        public void UpdateAdvertisemen(Advertisement advertisement)
         {
-            db.SaveChanges();
+            using (var connection = new SqlConnection(conString))
+            {
+                connection.Open();
+
+                var transaction = connection.BeginTransaction();
+                try
+                {
+                    var command = new SqlCommand(@"UPDATE Advertisements
+                                                      SET Name = @Name,
+                                                          Description = @Description,
+                                                          PublishDate = @PublishDate,
+                                                          Price = @Price,
+                                                      WHERE Advertisements.IdAdvertisement=@IdAdvertisement;
+
+                                                   UPDATE Contacts
+                                                      SET Text = @Text
+                                                      WHERE IdContact=@IdContact",
+                                                  connection,
+                                                  transaction);
+
+                    command.Parameters.AddWithValue("@IdAdvertisement", advertisement.IdAdvertisement);
+                    command.Parameters.AddWithValue("@Name", advertisement.Name);
+                    command.Parameters.AddWithValue("@Description", advertisement.Description);
+                    command.Parameters.AddWithValue("@Price", advertisement.Price);
+                    command.Parameters.AddWithValue("@IdContact", advertisement.Contacts.IdContacts);
+                    command.Parameters.AddWithValue("@Text", advertisement.Contacts.Text);
+
+                    int numberOfUpdatedAdvertisements = command.ExecuteNonQuery();
+
+                    if (numberOfUpdatedAdvertisements != 0)
+                    {
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        throw new RepositoryHasNotThisItemException();
+                    }
+                }
+                catch (RepositoryHasNotThisItemException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message);
+                    transaction.Rollback();
+                }
+            }
         }
 
         ILog log = LogManager.GetLogger(typeof(SqlRepository));

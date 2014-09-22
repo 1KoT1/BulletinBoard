@@ -151,24 +151,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201409201254537_InitialCreate.cs" />
-    <Compile Include="Migrations\201409201254537_InitialCreate.Designer.cs">
-      <DependentUpon>201409201254537_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409201504363_ChangeContactsStructure.cs" />
-    <Compile Include="Migrations\201409201504363_ChangeContactsStructure.Designer.cs">
-      <DependentUpon>201409201504363_ChangeContactsStructure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409210915440_ContactsNotNull.cs" />
-    <Compile Include="Migrations\201409210915440_ContactsNotNull.Designer.cs">
-      <DependentUpon>201409210915440_ContactsNotNull.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Contacts.cs" />
     <Compile Include="Models\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlRepository\BuletinBoardDbContext.cs" />
     <Compile Include="SqlRepository\SqlRepository.cs" />
     <Compile Include="ViewModels\CreateAdvertisementView.cs" />
   </ItemGroup>
@@ -266,17 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409201254537_InitialCreate.resx">
-      <DependentUpon>201409201254537_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409201504363_ChangeContactsStructure.resx">
-      <DependentUpon>201409201504363_ChangeContactsStructure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409210915440_ContactsNotNull.resx">
-      <DependentUpon>201409210915440_ContactsNotNull.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
