@@ -112,11 +112,11 @@ namespace BulletinBoard.SqlRepository
                                                   connection,
                                                   transaction);
 
-                    command.Parameters.Add("@ContactsText", advertisement.Contacts.Text);
-                    command.Parameters.Add("@Name", advertisement.Name);
-                    command.Parameters.Add("@Description", advertisement.Description);
-                    command.Parameters.Add("@PublishDate", advertisement.PublishDate);
-                    command.Parameters.Add("@Price", Convert.ToInt32(advertisement.Price));
+                    command.Parameters.AddWithValue("@ContactsText", advertisement.Contacts.Text);
+                    command.Parameters.AddWithValue("@Name", advertisement.Name);
+                    command.Parameters.AddWithValue("@Description", advertisement.Description);
+                    command.Parameters.AddWithValue("@PublishDate", advertisement.PublishDate);
+                    command.Parameters.AddWithValue("@Price", Convert.ToInt32(advertisement.Price));
 
                     advertisement.IdAdvertisement = Convert.ToInt32(command.ExecuteScalar());
 
