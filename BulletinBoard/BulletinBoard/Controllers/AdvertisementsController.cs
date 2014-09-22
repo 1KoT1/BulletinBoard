@@ -14,9 +14,9 @@ namespace BulletinBoard.Controllers
         //
         // GET: /Advertisements/
 
-        public ActionResult Index()
+        public ActionResult List()
         {
-            log.Debug("Run Index()");
+            log.Debug("Run List()");
             return View(repository.Advertisements);
         }
         public ActionResult Save(CreateAdvertisementView newAdvertisement)
@@ -25,7 +25,7 @@ namespace BulletinBoard.Controllers
             if (ValidateNewAdvertisement(newAdvertisement))
             {
                 repository.CreateAdvertisement(new Advertisement(newAdvertisement.Name, newAdvertisement.Description, Int32.Parse(newAdvertisement.Price), DateTime.Now, new Contacts(newAdvertisement.Contacts)));
-                return RedirectToAction("Index", "Advertisements");
+                return RedirectToAction("List", "Advertisements");
             }
             else
             {
