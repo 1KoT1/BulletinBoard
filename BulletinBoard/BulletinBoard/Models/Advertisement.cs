@@ -12,7 +12,7 @@ namespace BulletinBoard.Models
         public int IdAdvertisement { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public uint Price { get; set; }
+        public int Price { get; set; }
         public DateTime PublishDate { get; set; }
 
         [Required]
@@ -20,12 +20,13 @@ namespace BulletinBoard.Models
 
         public Advertisement()
         { }
-        public Advertisement(string name, string description, uint price, DateTime publishDate, Contacts contacts)
+        public Advertisement(string name, string description, int price, DateTime publishDate, Contacts contacts)
         {
             Name = name;
             Description = description;
             PublishDate = publishDate;
             Contacts = contacts;
+            Price = price;
         }
     }
 }

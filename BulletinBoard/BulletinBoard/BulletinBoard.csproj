@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201409210915440_ContactsNotNull.Designer.cs">
       <DependentUpon>201409210915440_ContactsNotNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409222118409_AddPrice.cs" />
+    <Compile Include="Migrations\201409222118409_AddPrice.Designer.cs">
+      <DependentUpon>201409222118409_AddPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Contacts.cs" />
@@ -276,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409210915440_ContactsNotNull.resx">
       <DependentUpon>201409210915440_ContactsNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409222118409_AddPrice.resx">
+      <DependentUpon>201409222118409_AddPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

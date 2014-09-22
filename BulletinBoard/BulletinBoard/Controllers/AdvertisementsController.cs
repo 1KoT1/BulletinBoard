@@ -24,7 +24,7 @@ namespace BulletinBoard.Controllers
             log.Debug("Run Save(Advertisement newAdvertisement)");
             if (ValidateNewAdvertisement(newAdvertisement))
             {
-                repository.CreateAdvertisement(new Advertisement(newAdvertisement.Name, newAdvertisement.Description, Convert.ToUInt32(newAdvertisement.Price), DateTime.Now, new Contacts(newAdvertisement.Contacts)));
+                repository.CreateAdvertisement(new Advertisement(newAdvertisement.Name, newAdvertisement.Description, Int32.Parse(newAdvertisement.Price), DateTime.Now, new Contacts(newAdvertisement.Contacts)));
                 return RedirectToAction("Index", "Advertisements");
             }
             else
@@ -47,7 +47,7 @@ namespace BulletinBoard.Controllers
             if (priceIsNumber)
             {
                 newAdvertisementValid &= CheckRuleAndSetErrMessage(() => price >= 0, "Price", "Цена должна быть неотрицательна.");
-                var maxPrice = UInt32.MaxValue;
+                var maxPrice = Int32.MaxValue;
                 newAdvertisementValid &= CheckRuleAndSetErrMessage(() => price < maxPrice, "Price", String.Format("Система не может обработать цены выше {0}", maxPrice));
             }
 
