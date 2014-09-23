@@ -1,0 +1,66 @@
+﻿@model BulletinBoard.ViewModels.AdvertisementsListPage
+@{
+    ViewBag.Title = "Доска объявлений";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+    @Scripts.Render("/Scripts/advertisement/index.js")
+}
+@section styles {
+    @Styles.Render("/Content/advertisements/index.css")
+}
+
+<h2>Доска объявлений</h2>
+
+<div>
+    @Html.ActionLink("Подать объявление", "Create", "Advertisements")
+</div>
+
+<div>
+    @Html.ActionLink("Дата", "List", "Advertisements", new { sort = BulletinBoard.ViewModels.Sort.PublishDate, minPrice = Model.Filter.MinPrice, maxPrice = Model.Filter.MaxPrice }, null)
+    @Html.ActionLink("Цена", "List", "Advertisements", new { sort = BulletinBoard.ViewModels.Sort.Price, minPrice = Model.Filter.MinPrice, maxPrice = Model.Filter.MaxPrice }, null)
+    @Html.ActionLink("Заголовок", "List", "Advertisements", new { sort = BulletinBoard.ViewModels.Sort.Name, minPrice = Model.Filter.MinPrice, maxPrice = Model.Filter.MaxPrice }, null)
+</div>
+
+<div id="advertisementsList">
+    @foreach (var advertisement in Model.Advertisements)
+    {
+        <div class="advertisementTitle">
+            <div class="advertisementName">
+                @advertisement.Name
+            </div>
+            <div class="advertisementPrice">
+                @advertisement.Price
+            </div>
+            <div class="advertisementPublishDate">
+                @advertisement.PublishDate
+            </div>
+        </div>
+        <div class="advertisementDescription">
+            @advertisement.Description
+        </div>
+    }
+</div>
+<div id="filter">
+    @using (@Html.BeginForm("List", "Advertisements", new { sort = Model.Sort }, FormMethod.Get))
+    {
+        <fieldset>
+            @Html.TextBox("sort", Model.Sort, new { style = "display: none" })
+            <div>
+                Минимальная цена:
+            </div>
+            <div>
+                @Html.TextBox("MinPrice", Model.Filter.MinPrice)
+            </div>
+            <div>
+                Максимальная цена:
+            </div>
+            <div>
+                @Html.TextBox("MaxPrice", Model.Filter.MaxPrice)
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Применить
+            </button>
+        </fieldset>
+    }
+</div>

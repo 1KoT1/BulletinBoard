@@ -16,8 +16,8 @@ namespace BulletinBoard
 
             routes.MapRoute(
                 name: "AdvertisementsList",
-                url: "Advertisements/List/OrderBy{sort}",
-                defaults: new { controller = "Advertisements", action = "List", sort = UrlParameter.Optional }
+                url: "Advertisements/List/",
+                defaults: new { controller = "Advertisements", action = "List" }
             );
 
             routes.MapRoute(
