@@ -14,11 +14,14 @@ namespace BulletinBoard.UnitTests
     public class AdvertisementsControllerTest
     {
         [Test]
-        public void List_GetView_ItsOkViewModelIsAdvertisementsListPagew()
+        public void List_GetView_ItsOkViewModelIsAdvertisementsListPagew(
+            [Values( Sort.Name, Sort.Price, Sort.PublishDate)]Sort sort,
+            [Random(0, uint.MaxValue, 1)]uint minPrice,
+            [Random(0, uint.MaxValue, 1)]uint maxPrice)
         {
             var controller = new AdvertisementsController();
 
-            var result = controller.List();
+            var result = controller.List(sort, minPrice, maxPrice);
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<AdvertisementsListPage>((result as ViewResult).Model);
