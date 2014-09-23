@@ -18,7 +18,8 @@ namespace BulletinBoard.Controllers
         {
             log.Debug("Run List()");
 
-            var advertisementsListPagemodel = new AdvertisementsListPage(repository.Advertisements.OrderBy(sort), sort, new AdvertisementsFilter(minPrice, maxPrice));
+            var advertisements = repository.Advertisements.Where(adv => minPrice <= adv.Price && adv.Price <= maxPrice).OrderBy(sort);
+            var advertisementsListPagemodel = new AdvertisementsListPage(advertisements, sort, new AdvertisementsFilter(minPrice, maxPrice));
             return View(advertisementsListPagemodel);
         }
 
