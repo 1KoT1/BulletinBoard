@@ -28,14 +28,14 @@ namespace BulletinBoard.Models
         void SaveAllChanges();
     }
         
-    class CreatedObjectIsNotEmptyException : Exception
+    public class CreatedObjectIsNotEmptyException : Exception
     {
         public CreatedObjectIsNotEmptyException() :
             base("Свойство Id создаваемого элемента должно быть равно  0.")
         { }
     }
 
-    class RepositoryHasNotThisItemException : Exception
+    public class RepositoryHasNotThisItemException : Exception
     {
         public RepositoryHasNotThisItemException() :
             base("Данный элемент не содержится в хранилище. Вероятно объект данных создавался минуя предназначенный для этого метод хранилища")
