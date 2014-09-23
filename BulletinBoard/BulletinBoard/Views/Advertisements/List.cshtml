@@ -22,6 +22,28 @@
     @Html.ActionLink("Заголовок", "List", "Advertisements", new { sort = BulletinBoard.ViewModels.Sort.Name, minPrice = Model.Filter.MinPrice, maxPrice = Model.Filter.MaxPrice }, null)
 </div>
 
+<div id="filter">
+    @using (@Html.BeginForm("List", "Advertisements", new { sort = Model.Sort }, FormMethod.Get))
+    {
+        @Html.TextBox("sort", Model.Sort, new { style = "display: none" })
+        <div>
+            Минимальная цена:
+        </div>
+        <div>
+            @Html.TextBox("MinPrice", Model.Filter.MinPrice)
+        </div>
+        <div>
+            Максимальная цена:
+        </div>
+        <div>
+            @Html.TextBox("MaxPrice", Model.Filter.MaxPrice)
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Применить
+        </button>
+    }
+</div>
+
 <div id="advertisementsList">
     @foreach (var advertisement in Model.Advertisements)
     {
@@ -39,28 +61,5 @@
         <div class="advertisementDescription">
             @advertisement.Description
         </div>
-    }
-</div>
-<div id="filter">
-    @using (@Html.BeginForm("List", "Advertisements", new { sort = Model.Sort }, FormMethod.Get))
-    {
-        <fieldset>
-            @Html.TextBox("sort", Model.Sort, new { style = "display: none" })
-            <div>
-                Минимальная цена:
-            </div>
-            <div>
-                @Html.TextBox("MinPrice", Model.Filter.MinPrice)
-            </div>
-            <div>
-                Максимальная цена:
-            </div>
-            <div>
-                @Html.TextBox("MaxPrice", Model.Filter.MaxPrice)
-            </div>
-            <button type="submit" class="btn btn-primary">
-                Применить
-            </button>
-        </fieldset>
     }
 </div>

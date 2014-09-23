@@ -1,3 +1,15 @@
+#filter{
+    width: 200px;
+    float: right;
+    border: 1px solid black;
+    padding: 4px;
+    margin-top: 5px;
+}
+
+#advertisementsList{
+    margin-right: 220px;
+}
+
 .advertisementTitle{
     border-left: 1px solid black;
     border-top: 1px solid black;
