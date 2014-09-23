@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BulletinBoard.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace BulletinBoard
 
             routes.MapRoute(
                 name: "AdvertisementsList",
-                url: "Advertisements/List/sort={sort}",
+                url: "Advertisements/List/OrderBy{sort}",
                 defaults: new { controller = "Advertisements", action = "List", sort = UrlParameter.Optional }
             );
 
