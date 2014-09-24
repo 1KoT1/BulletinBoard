@@ -58,7 +58,29 @@ namespace BulletinBoard.UnitTests
             {
                 if(backAdvertisment != null && adv.PublishDate < backAdvertisment.PublishDate)
                 {
-                    Assert.Fail();
+                    Assert.Fail("Список объявлений должен быть отсортирован по дате публикации.");
+                }
+                backAdvertisment = adv;
+            }
+        }
+
+        [Test]
+        public void List_GetViewOrderedByPublishDate_ItsOkViewContanesListOfAdvertisementsOrderedByPublishDate(
+            [Values(Sort.PublishDate)]Sort sort,
+            [Values((uint)0, uint.MaxValue, (uint)6)]uint minPrice,
+            [Values((uint)0, uint.MaxValue, (uint)412)]uint maxPrice)
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.List();
+
+            var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
+            Advertisement backAdvertisment = null;
+            foreach (var adv in advertisements)
+            {
+                if (backAdvertisment != null && adv.PublishDate < backAdvertisment.PublishDate)
+                {
+                    Assert.Fail("Список объявлений должен быть отсортирован по дате публикации.");
                 }
                 backAdvertisment = adv;
             }
