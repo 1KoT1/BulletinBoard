@@ -192,5 +192,16 @@ namespace BulletinBoard.UnitTests
                 backAdvertisment = adv;
             }
         }
+
+        [Test]
+        public void Create_GetView_ItsOkViewModelIsCreateAdvertisementView()
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.Create();
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.IsInstanceOf<CreateAdvertisementView>((result as ViewResult).Model);
+        }
     }
 }
