@@ -162,5 +162,35 @@ namespace BulletinBoard.UnitTests
                 Assert.Fail("Отфильтрованный список должен быть пустым.");
             }
         }
+
+        [Test]
+        public void Lisr_GetViewFilterByPriceAndOrderedByName_ItsOkViewContanesListOfAdvertisementsFilteredByPriceAndOrderedByName(
+            [Values(Sort.Name)]Sort sort,
+            [Values((uint)252)]uint minPrice,
+            [Values((uint)1515)]uint maxPrice)
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.List(sort, minPrice, maxPrice);
+
+            var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
+            if (advertisements.Any(adv => adv.Price < minPrice))
+            {
+                Assert.Fail("Цены отфильтрованых объявлений должны быть болше минимума.");
+            }
+            if (advertisements.Any(adv => adv.Price > maxPrice))
+            {
+                Assert.Fail("Цены отфильтрованых объявлений должны быть меньше максимума.");
+            }
+            Advertisement backAdvertisment = null;
+            foreach (var adv in advertisements)
+            {
+                if (backAdvertisment != null && adv.Name.CompareTo(backAdvertisment.Name) == -1)
+                {
+                    Assert.Fail("Список объявлений должен быть отсортирован по заголовку.");
+                }
+                backAdvertisment = adv;
+            }
+        }
     }
 }
