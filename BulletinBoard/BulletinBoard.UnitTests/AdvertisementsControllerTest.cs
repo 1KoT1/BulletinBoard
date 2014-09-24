@@ -203,5 +203,37 @@ namespace BulletinBoard.UnitTests
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<CreateAdvertisementView>((result as ViewResult).Model);
         }
+
+        [Test]
+        public void Save_SetFailAdv_ItsOkReturnCreatePage()
+        {
+            var controller = new AdvertisementsController();
+
+            var advertisementView = new CreateAdvertisementView();
+            advertisementView.Price = "-1";
+            var result = controller.Save(advertisementView);
+
+            Assert.IsInstanceOf<CreateAdvertisementView>((result as ViewResult).Model);
+        }
+
+        [Test]
+        public void Save_SetValidAdv_ItsOkReturnListAdv()
+        {
+            var controller = new AdvertisementsController();
+
+            var advertisementView = new CreateAdvertisementView()
+            {
+                Contacts = "т. 5745773",
+                Description = "Пример",
+                Name = "Пример",
+                Price = "1000"
+            };
+            var result = controller.Save(advertisementView);
+
+            Assert.IsInstanceOf<RedirectToRouteResult>(result);
+
+            Assert.IsTrue((result as RedirectToRouteResult).RouteValues.TryGetValue("action", "List"), "Контроллер должен быть Advertisements");
+            Assert.IsTrue((result as RedirectToRouteResult).RouteValues.TryGetValue("action", "List"), "Действие должно быть List");
+        }
     }
 }
