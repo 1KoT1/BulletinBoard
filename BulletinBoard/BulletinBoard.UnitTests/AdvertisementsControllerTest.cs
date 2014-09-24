@@ -103,5 +103,26 @@ namespace BulletinBoard.UnitTests
                 backAdvertisment = adv;
             }
         }
+
+        [Test]
+        public void List_GetViewOrderedByPrice_ItsOkViewContanesListOfAdvertisementsOrderedByPrice(
+            [Values(Sort.Price)]Sort sort
+            )
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.List(sort);
+
+            var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
+            Advertisement backAdvertisment = null;
+            foreach (var adv in advertisements)
+            {
+                if (backAdvertisment != null && adv.Price < backAdvertisment.Price)
+                {
+                    Assert.Fail("Список объявлений должен быть отсортирован по цене.");
+                }
+                backAdvertisment = adv;
+            }
+        }
     }
 }
