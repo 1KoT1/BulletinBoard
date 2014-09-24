@@ -124,5 +124,43 @@ namespace BulletinBoard.UnitTests
                 backAdvertisment = adv;
             }
         }
+
+        [Test, Sequential]
+        public void List_GetViewFilteredByPrice_ItsOkViewContanesListOfAdvertisementsFilteredByPrice(
+            [Values(Sort.Name,     Sort.Price, Sort.PublishDate, Sort.Name)]Sort sort,
+            [Values((uint)0,       (uint)0,    (uint)635,        (uint)635)]uint minPrice,
+            [Values(uint.MaxValue, (uint)9065, uint.MaxValue,    (uint)9065)]uint maxPrice)
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.List(sort, minPrice, maxPrice);
+            
+            var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
+            if (advertisements.Any(adv => adv.Price < minPrice))
+            {
+                Assert.Fail("Цены отфильтрованых объявлений должны быть болше минимума.");
+            }
+            if (advertisements.Any(adv => adv.Price > maxPrice))
+            {
+                Assert.Fail("Цены отфильтрованых объявлений должны быть меньше максимума.");
+            }
+        }
+
+        [Test, Sequential]
+        public void List_GetViewFilteredByPrice_ItsOkViewContanesEmptyListOfAdvertisements(
+            [Values(Sort.Name, Sort.Price, Sort.PublishDate, Sort.Name,     Sort.Name)]Sort sort,
+            [Values((uint)0,   (uint)635,  (uint)444,        uint.MaxValue, uint.MaxValue)]uint minPrice,
+            [Values((uint)0,   (uint)134,  (uint)0,          uint.MinValue, uint.MaxValue)]uint maxPrice)
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.List(sort, minPrice, maxPrice);
+
+            var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
+            if (advertisements.Any())
+            {
+                Assert.Fail("Отфильтрованный список должен быть пустым.");
+            }
+        }
     }
 }
