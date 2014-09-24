@@ -9,6 +9,27 @@ namespace BulletinBoard.UnitTests
 {
     public class MockRepository : IRepository
     {
+        public MockRepository()
+        {
+            advertisements.Add(new Advertisement("Объявление № 1",
+                                                 "Описания объявления № 1.",
+                                                 1800,
+                                                 new DateTime(2014, 5, 27), 
+                                                 new Contacts("т. 63467377337")));
+            
+            advertisements.Add(new Advertisement("Объявление № 2",
+                                                 "Описания объявления № 2.",
+                                                 350,
+                                                 new DateTime(2014, 9, 4),
+                                                 new Contacts("т. 5466544545")));
+
+            advertisements.Add(new Advertisement("Объявление № 3",
+                                                 "Описания объявления № 3.",
+                                                 11000,
+                                                 new DateTime(2014, 3, 20),
+                                                 new Contacts("т. 73437735")));
+        }
+
         private List<Advertisement> advertisements = new List<Advertisement>();
         public IEnumerable<Advertisement> Advertisements
         {
