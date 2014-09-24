@@ -16,8 +16,8 @@ namespace BulletinBoard.UnitTests
         [Test]
         public void List_GetView_ItsOkViewModelIsAdvertisementsListPagew(
             [Values( Sort.Name, Sort.Price, Sort.PublishDate)]Sort sort,
-            [Values(0, uint.MaxValue, 5)]uint minPrice,
-            [Values(0, uint.MaxValue, 4537)]uint maxPrice)
+            [Values((uint)0, uint.MaxValue, (uint)3)]uint minPrice,
+            [Values((uint)0, uint.MaxValue, (uint)6437)]uint maxPrice)
         {
             var controller = new AdvertisementsController();
 
