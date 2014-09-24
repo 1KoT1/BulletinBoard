@@ -30,13 +30,11 @@ namespace BulletinBoard.UnitTests
 
         [Test]
         public void List_GetView_ItsOkViewContanesListOfAdvertisements(
-            [Values(Sort.Name, Sort.Price, Sort.PublishDate)]Sort sort,
-            [Values((uint)0, uint.MaxValue, (uint)3)]uint minPrice,
-            [Values((uint)0, uint.MaxValue, (uint)6437)]uint maxPrice)
+            [Values(Sort.Name, Sort.Price, Sort.PublishDate)]Sort sort)
         {
             var controller = new AdvertisementsController();
 
-            var result = controller.List();
+            var result = controller.List(sort);
 
             var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
             if (!advertisements.Any())
@@ -72,7 +70,7 @@ namespace BulletinBoard.UnitTests
         {
             var controller = new AdvertisementsController();
 
-            var result = controller.List();
+            var result = controller.List(sort, minPrice, maxPrice);
 
             var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
             Advertisement backAdvertisment = null;
@@ -81,6 +79,28 @@ namespace BulletinBoard.UnitTests
                 if (backAdvertisment != null && adv.PublishDate < backAdvertisment.PublishDate)
                 {
                     Assert.Fail("Список объявлений должен быть отсортирован по дате публикации.");
+                }
+                backAdvertisment = adv;
+            }
+        }
+
+        [Test]
+        public void List_GetViewOrderedByName_ItsOkViewContanesListOfAdvertisementsOrderedBName(
+            [Values(Sort.Name)]Sort sort,
+            [Values((uint)0, uint.MaxValue, (uint)839)]uint minPrice,
+            [Values((uint)0, uint.MaxValue, (uint)5244)]uint maxPrice)
+        {
+            var controller = new AdvertisementsController();
+
+            var result = controller.List(sort, minPrice, maxPrice);
+
+            var advertisements = ((result as ViewResult).Model as AdvertisementsListPage).Advertisements;
+            Advertisement backAdvertisment = null;
+            foreach (var adv in advertisements)
+            {
+                if (backAdvertisment != null && adv.Name.CompareTo(backAdvertisment.Name) == -1)
+                {
+                    Assert.Fail("Список объявлений должен быть отсортирован по заголовку.");
                 }
                 backAdvertisment = adv;
             }
